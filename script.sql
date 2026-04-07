@@ -35,6 +35,8 @@ BEGIN
         SELECT COUNT(PassegerID)
         FROM titanic
         WHERE Survived = 1 and Pclase = 1;
+        FETCH cur_sobreviventes_p1 INTO n_sobreviventes;
+        RAISE NOTICE 'O número de sobreviventes na 1ª classe é: %', n_sobreviventes;
     CLOSE cur_sobreviventes_p1;
 END;
 $$
