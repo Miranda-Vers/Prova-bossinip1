@@ -48,9 +48,33 @@ $$
 -- não existir nenhuma, o valor -1 seja exibido.
 -- Mensagem de commit: feat(p1): encontra sobreviventes do sexo feminino
 
-
-
-
+DO $$
+DECLARE
+    cur_mulheres_sobreviventes REFCURSOR;
+    v_contagem INT;
+    v_nome_tabela VARCHAR(200) := 'titanic';
+BEGIN
+    OPEN cur_mulheres_sobreviventes FOR EXECUTE
+        format
+            (
+                '
+            SELECT COUNT(*)
+            FROM %s
+            WHERE Sex = $1 AND Survived = $2
+            ',
+            v_nome_tabela
+        )
+        USING 'female', 1;
+        FETCH cur_mulheres_sobreviventes INTO v_contagem;
+       
+        IF v_contagem = 0 THEN
+         RAISE NOTICE '%', -1;
+        ELSE
+         RAISE NOTICE '%', v_contagem;
+        END IF;
+    CLOSE cur_mulheres_sobreviventes;
+END;
+$$
 
 -- Enunciado 4 - Tarifa versus embarque
 -- Dentre os passageiros que pagaram tarifa (Fare) maior que 50, quantos embarcaram em
