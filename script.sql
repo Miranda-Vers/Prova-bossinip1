@@ -10,14 +10,14 @@
 
 -- Mensagem de commit: feat(p1): cria base e importa dados
 
-
-
-
-
-
-
-
-
+CREATE Table titanic (
+    PassegerID SERIAL PRIMARY KEY,
+    Survived INTEGER,
+    Pclase INTEGER,
+    Nome VARCHAR(100),
+    Sex VARCHAR(6),
+    Fare DECIMAL(4,2),
+    Embarked CHAR (1))
 
 
 -- Enunciado 2 - Sobrevivência em função da classe social
