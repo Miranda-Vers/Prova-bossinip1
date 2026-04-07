@@ -25,10 +25,19 @@ CREATE Table titanic (
 -- viajavam na primeira classe (Pclass = 1).
 -- Mensagem de commit: feat(p1): encontra sobreviventes da primeira classe
 
-
-
-
-
+DO
+$$
+DECLARE
+    cur_sobreviventes_p1 REFCURSOR;
+    n_sobreviventes INTEGER;
+BEGIN
+    OPEN cur_sobreviventes_p1 FOR
+        SELECT COUNT(PassegerID)
+        FROM titanic
+        WHERE Survived = 1 and Pclase = 1;
+    CLOSE cur_sobreviventes_p1;
+END;
+$$
 
 
 -- Enunciado 3 - Sobrevivência em função do gênero
